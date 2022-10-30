@@ -229,7 +229,7 @@
 			          	?>
 	            		<div class="row">
 			              	<div class="col-xs-12">
-			                	<h4><a class='btn btn-default btn-md' href="../employees/">Employee List</a></h4>
+			                	<h4><a class='btn btn-default btn-md' href="../employee/">Employee List</a></h4>
 			             	</div>
 	            		</div>
 			            <div class="panel-body">
