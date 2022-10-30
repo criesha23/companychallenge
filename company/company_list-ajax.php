@@ -2,9 +2,9 @@
 
 include_once('../lib/mysql_connect.php');
 
-$sql_get_data=" SELECT count(emp.employee_id) as total_emp_count, comp.*
+$sql_get_data=" SELECT IFNULL(count(emp.employee_id),0) as total_emp_count, comp.*
 FROM tbl_companies as  comp
-INNER JOIN tbl_employees as emp
+LEFT JOIN tbl_employees as emp
 ON comp.company_id = emp.company_id 
 GROUP BY comp.company_id 
 ORDER BY comp.company_id ASC";
