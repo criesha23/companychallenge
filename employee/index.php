@@ -145,94 +145,92 @@
 		
 		</script>
 		<?php include_once('../lib/sidebar_menu.php'); ?>
+		<div class="container-fluid">
+      		<div class="row">
+			  	<div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+					<div class="row placeholders">
+						<h1 class="page-header" style="border-bottom: 0px solid #eee;">Employee List</h1>
 
-	  	<div class="main">
-	     	<div class="row">
-	        	<div class="col-xs-12 col-lg-12">
-	          		<div class="panel">
-			          	<?php 
-			          		if($_p == "AddEmployee"){
-								$company_list = func_get_companies($conn);
+				  		<div class="table-responsive">
 
-			          			include_once('employee_add_form.php');
-			          			exit;
-			          		}
-							else if ($_p == "Add"){
-			          			$name_for_insert=NULL;
-								if(isset($_REQUEST["txt_name"])==true){
-									$name_for_insert=$_REQUEST["txt_name"];
-									$name_for_insert = str_replace("'","\'",$name_for_insert);
+							<?php 
+								if($_p == "AddEmployee"){
+									$company_list = func_get_companies($conn);
+
+									include_once('employee_add_form.php');
+									exit;
 								}
+								else if ($_p == "Add"){
+									$name_for_insert=NULL;
+									if(isset($_REQUEST["txt_name"])==true){
+										$name_for_insert=$_REQUEST["txt_name"];
+										$name_for_insert = str_replace("'","\'",$name_for_insert);
+									}
 
 
-								$address_for_insert=NULL;
-								if(isset($_REQUEST["txt_address"])==true){
-									$address_for_insert=$_REQUEST["txt_address"];
-									$address_for_insert = str_replace("'","\'",$address_for_insert);
-								}
+									$address_for_insert=NULL;
+									if(isset($_REQUEST["txt_address"])==true){
+										$address_for_insert=$_REQUEST["txt_address"];
+										$address_for_insert = str_replace("'","\'",$address_for_insert);
+									}
 
 
-								$company_id=NULL;
-								if(isset($_REQUEST["txt_company"])==true){
-									$company_id=$_REQUEST["txt_company"];
-								}
+									$company_id=NULL;
+									if(isset($_REQUEST["txt_company"])==true){
+										$company_id=$_REQUEST["txt_company"];
+									}
 
 
-								$sql_insert = "INSERT INTO tbl_employees (company_id, employee_name, employee_address) 
-								VALUES ('".$company_id."', '".$name_for_insert."', '".$address_for_insert."' ) ";
-								$return_insert=mysqli_query($conn,$sql_insert);
-								$emp_id = mysqli_insert_id($conn);
-	
-								
-
-			          		}else if ($_p == "Edit"){
-								$company_list = func_get_companies($conn);
-
-
-			          			$id = $_REQUEST['id'];
-			          			$sql_select="SELECT * FROM tbl_employees WHERE employee_id = '$id' ";
-			          			$return_select = mysqli_query($conn,$sql_select) or die( mysqli_error($conn) );
-			          			$row_select = mysqli_fetch_assoc($return_select);
-
-			          			
-			          			include_once('employee_edit_form.php');
-			          			exit;
-			          		}else if ($_p == "Update"){
-			          			$emp_id=$_REQUEST["txt_emp_id"];
-			          			$name_for_update=NULL;
-								if(isset($_REQUEST["txt_name"])==true){
-									$name_for_update=$_REQUEST["txt_name"];
-									$name_for_update = str_replace("'","\'",$name_for_update);
-								}
-								$address_for_update=NULL;
-								if(isset($_REQUEST["txt_address"])==true){
-									$address_for_update=$_REQUEST["txt_address"];
-									$address_for_update = str_replace("'","\'",$address_for_update);
-								}
-
-
-								$company_id=NULL;
-								if(isset($_REQUEST["txt_company"])==true){
-									$company_id=$_REQUEST["txt_company"];
-								}
-
-								$sql_update="UPDATE tbl_employees SET 
-									employee_name='".$name_for_update."', 
-									employee_address='".$address_for_update."', 
+									$sql_insert = "INSERT INTO tbl_employees (company_id, employee_name, employee_address) 
+									VALUES ('".$company_id."', '".$name_for_insert."', '".$address_for_insert."' ) ";
+									$return_insert=mysqli_query($conn,$sql_insert);
+									$emp_id = mysqli_insert_id($conn);
+		
 									
-									company_id='".$company_id."'
-									WHERE employee_id = ".$emp_id;
-								mysqli_query($conn,$sql_update) or die( mysqli_error($conn) );							
-								
 
-			          		}
-			          	?>
-	            		<div class="row">
-			              	<div class="col-xs-12">
-			                	<h4><a class='btn btn-default btn-md' href="../employee/">Employee List</a></h4>
-			             	</div>
-	            		</div>
-			            <div class="panel-body">
+								}else if ($_p == "Edit"){
+									$company_list = func_get_companies($conn);
+
+
+									$id = $_REQUEST['id'];
+									$sql_select="SELECT * FROM tbl_employees WHERE employee_id = '$id' ";
+									$return_select = mysqli_query($conn,$sql_select) or die( mysqli_error($conn) );
+									$row_select = mysqli_fetch_assoc($return_select);
+
+									
+									include_once('employee_edit_form.php');
+									exit;
+								}else if ($_p == "Update"){
+									$emp_id=$_REQUEST["txt_emp_id"];
+									$name_for_update=NULL;
+									if(isset($_REQUEST["txt_name"])==true){
+										$name_for_update=$_REQUEST["txt_name"];
+										$name_for_update = str_replace("'","\'",$name_for_update);
+									}
+									$address_for_update=NULL;
+									if(isset($_REQUEST["txt_address"])==true){
+										$address_for_update=$_REQUEST["txt_address"];
+										$address_for_update = str_replace("'","\'",$address_for_update);
+									}
+
+
+									$company_id=NULL;
+									if(isset($_REQUEST["txt_company"])==true){
+										$company_id=$_REQUEST["txt_company"];
+									}
+
+									$sql_update="UPDATE tbl_employees SET 
+										employee_name='".$name_for_update."', 
+										employee_address='".$address_for_update."', 
+										
+										company_id='".$company_id."'
+										WHERE employee_id = ".$emp_id;
+									mysqli_query($conn,$sql_update) or die( mysqli_error($conn) );							
+									
+
+								}
+							?>
+	            		
 			            	<?php if ($_p == "Add"){
 			            		echo "<pre>"
 								."Added record  ".$name_for_insert." "
@@ -253,9 +251,11 @@
 						  	<br>	
 						  	<br>	
 					      	<table id="employee_jqgrid"></table>
-			            </div>
+						</div>
 	          		</div>
 	        	</div>
+
+				<div class="col-sm-3 col-md-2"></div>
 	    	</div>
 	    </div>
 	</body>

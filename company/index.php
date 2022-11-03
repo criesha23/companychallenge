@@ -132,78 +132,78 @@
 
 		</script>
 		<?php include_once('../lib/sidebar_menu.php'); ?>
+		<div class="container-fluid">
+      		<div class="row">
+			  	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				  
 
-	  	<div class="main">
-	     	<div class="row">
-	        	<div class="col-xs-12 col-lg-12">
-	          		<div class="panel">
-			          	<?php 
-			          		if ($_p == "Addcompany"){
-			         
-			          			include_once('company_add_form.php');
-			          			exit;
-			          		}else if ($_p == "Add"){
-			          			$company_name_for_insert=NULL;
-								if(isset($_REQUEST["txt_company_name"])==true){
-									$company_name_for_insert=$_REQUEST["txt_company_name"];
-									$company_name_for_insert = str_replace("'","\'",$company_name_for_insert);
+					<div class="row placeholders">
+						<h1 class="page-header" style="border-bottom: 0px solid #eee;">Company List</h1>
+
+				  		<div class="table-responsive">
+							<?php 
+								if ($_p == "Addcompany"){
+						
+									include_once('company_add_form.php');
+									exit;
+								}else if ($_p == "Add"){
+									$company_name_for_insert=NULL;
+									if(isset($_REQUEST["txt_company_name"])==true){
+										$company_name_for_insert=$_REQUEST["txt_company_name"];
+										$company_name_for_insert = str_replace("'","\'",$company_name_for_insert);
+									}
+
+									$company_add_for_insert=NULL;
+									if(isset($_REQUEST["txt_company_add"])==true){
+										$company_add_for_insert=$_REQUEST["txt_company_add"];
+										$company_add_for_insert = str_replace("'","\'",$company_add_for_insert);
+									}
+
+
+									$sql_insert = "INSERT INTO tbl_companies (company_name, company_address) 
+										VALUES ('".$company_name_for_insert."', '".$company_add_for_insert."' ) ";
+									$return_insert=mysqli_query($conn,$sql_insert);
+									$company_id = mysqli_insert_id($conn);								
+
+								}else if ($_p == "Edit"){
+									$id = $_REQUEST['id'];
+
+									$sql_select="SELECT * FROM tbl_companies WHERE company_id = '$id' ";
+									$return_select = mysqli_query($conn,$sql_select) or die( mysqli_error($conn) );
+									$row_select = mysqli_fetch_assoc($return_select);
+
+									include_once('company_edit_form.php');
+									exit;
+								}else if ($_p == "Update"){
+
+									$company_id=$_REQUEST["txt_company_id"];
+									$company_name_for_update=NULL;
+									if(isset($_REQUEST["txt_company_name"])==true){
+										$company_name_for_update=$_REQUEST["txt_company_name"];
+										$company_name_for_update = str_replace("'","\'",$company_name_for_update);
+									}
+
+									$company_add_for_update=NULL;
+									if(isset($_REQUEST["txt_company_add"])==true){
+										$company_add_for_update=$_REQUEST["txt_company_add"];
+										$company_add_for_update = str_replace("'","\'",$company_add_for_update);
+									}
+
+
+									$sql_update="UPDATE tbl_companies SET 
+										company_name='".$company_name_for_update."', 
+										company_address='".$company_add_for_update."'
+										WHERE company_id = '$company_id' ";
+									mysqli_query($conn,$sql_update) or die( mysqli_error($conn) );
+
+									
+									
 								}
-
-								$company_add_for_insert=NULL;
-								if(isset($_REQUEST["txt_company_add"])==true){
-									$company_add_for_insert=$_REQUEST["txt_company_add"];
-									$company_add_for_insert = str_replace("'","\'",$company_add_for_insert);
-								}
-
-
-								$sql_insert = "INSERT INTO tbl_companies (company_name, company_address) 
-									VALUES ('".$company_name_for_insert."', '".$company_add_for_insert."' ) ";
-								$return_insert=mysqli_query($conn,$sql_insert);
-								$company_id = mysqli_insert_id($conn);								
-
-			          		}else if ($_p == "Edit"){
-			          			$id = $_REQUEST['id'];
-
-			          			$sql_select="SELECT * FROM tbl_companies WHERE company_id = '$id' ";
-			          			$return_select = mysqli_query($conn,$sql_select) or die( mysqli_error($conn) );
-			          			$row_select = mysqli_fetch_assoc($return_select);
-
-			          			include_once('company_edit_form.php');
-			          			exit;
-			          		}else if ($_p == "Update"){
-
-			          			$company_id=$_REQUEST["txt_company_id"];
-			          			$company_name_for_update=NULL;
-								if(isset($_REQUEST["txt_company_name"])==true){
-									$company_name_for_update=$_REQUEST["txt_company_name"];
-									$company_name_for_update = str_replace("'","\'",$company_name_for_update);
-								}
-
-								$company_add_for_update=NULL;
-								if(isset($_REQUEST["txt_company_add"])==true){
-									$company_add_for_update=$_REQUEST["txt_company_add"];
-									$company_add_for_update = str_replace("'","\'",$company_add_for_update);
-								}
-
-
-								$sql_update="UPDATE tbl_companies SET 
-									company_name='".$company_name_for_update."', 
-									company_address='".$company_add_for_update."'
-									WHERE company_id = '$company_id' ";
-								mysqli_query($conn,$sql_update) or die( mysqli_error($conn) );
-
-								
-								
-			          		}
-			          	?>
-	            		<div class="row">
-			              	<div class="col-xs-12">
-			                	<h4><a class='btn btn-default btn-md' href="../company/">Company List</a></h4>
-			             	</div>
-	            		</div>
-			            <div class="panel-body">
-			            	<?php if ($_p == "Add"){
-			            	echo "<pre>"
+							?>
+							
+							
+							<?php if ($_p == "Add"){
+							echo "<pre>"
 								."Added record  ".$company_name_for_insert." "
 								."<a class='btn btn-default btn-md' role='button' href='?_p=Edit&id=$company_id'><span class='glyphicon glyphicon-pencil'></span>&nbspEdit</a>"
 								."</pre><br>";
@@ -212,19 +212,20 @@
 								."Updated record  ".$company_name_for_update." "
 								."<a class='btn btn-default btn-md' role='button' href='?_p=Edit&id=$company_id'><span class='glyphicon glyphicon-pencil'></span>&nbspEdit</a>"
 								."</pre><br>";
-			          		}
+							}
 							?>
 
 
-			                <a href="?_p=Addcompany" type="button" class="btn btn-primary btn-xs">Add company</a>&nbsp;|&nbsp;
-			                <span id='span_tab1_recordcount'></span>&nbsp;|&nbsp;
+							<a href="?_p=Addcompany" type="button" class="btn btn-primary btn-xs">Add company</a>&nbsp;|&nbsp;
+							<span id='span_tab1_recordcount'></span>&nbsp;|&nbsp;
 							<button class="btn btn-default btn-xs" onClick="filterToolbar_clearFilters('company_jqgrid');">Clear filters</button>		
-						  	<br>	
-						  	<br>	
-					      	<table id="company_jqgrid"></table>
-			            </div>
-	          		</div>
+							<br>	
+							<br>	
+							<table class="table" id="company_jqgrid"></table>
+						</div>
+					</div>   
 	        	</div>
+				<div class="col-sm-3 col-md-2"></div>
 	    	</div>
 	    </div>
 	</body>

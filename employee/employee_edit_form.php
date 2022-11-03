@@ -17,43 +17,29 @@
 		<h3>Update Employee</h3>
 		<form name="frmEditEmployee" action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" >
 			<br>
-			<table border="0" style="width: 100%;">
-				
-
-				<tr>
-					<td class="td_label" ><label>Company &nbsp;&nbsp; </label></td>
-					<td class="td_content">
-						<select  
-							class="form-control input-sm responsive" 
-							id="txt_company" 
-							name="txt_company" 
-							required=true
-							style="width: auto;"  
-					>
-						<?php  foreach($company_list as $company){
-							echo "<option value='".$company['company_id']."' ".($company['company_id']==$row_select['company_id'] ? 'selected' : '').">".$company['company_name']."</option>";
-						}?>
-					</select>
-					</td>
-				</tr>
-				
-				<tr>
-					<td class="td_label" ><label>Employee Name &nbsp;&nbsp; </label></td>
-					<td class="td_content">
-						<input type="text" class="form-control" id="txt_name" name="txt_name" value="<?php echo $row_select['employee_name'];?>" required=true>
-					</td>
-				</tr>
-				
-
-				<tr>
-					<td class="td_label" ><label>Address &nbsp;&nbsp; </label></td>
-					<td class="td_content">
-						<input type="text" class="form-control" id="txt_address" name="txt_address" value="<?php echo $row_select['employee_address'];?>" >
-					</td>
-				</tr>
-
-				
-			</table>
+			<div class="form-group">
+				<label for="txt_company">Company</label>
+				<select  
+					class="form-control input-sm responsive" 
+					id="txt_company" 
+					name="txt_company" 
+					required=true
+					style="width: auto;"  
+				>
+					<?php  foreach($company_list as $company){
+						echo "<option value='".$company['company_id']."' ".($company['company_id']==$row_select['company_id'] ? 'selected' : '').">".$company['company_name']."</option>";
+					}
+					?>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="txt_name">Name</label>
+				<input type="text" class="form-control" id="txt_name" name="txt_name" value="<?php echo $row_select['employee_name'];?>" required=true>
+			</div>
+			<div class="form-group">
+				<label for="txt_address">Address</label>
+				<input type="text" class="form-control" id="txt_address" name="txt_address" value="<?php echo $row_select['employee_address'];?>" >
+			</div>
 			
 			<div class='form-group'>
 				<br/>

@@ -1,18 +1,20 @@
-<nav class="navbar navbar-default sidebar" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
- 		<div class="navbar-header">
-    		<h4><strong>Company Challenge</h4>
-  		</div>
-  		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-    		<ul class="nav navbar-nav">
-	      		<li>
-      				<a href="../company/">Companies<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-large"></span></a>
-      			</li>
-
-				  <li>
-      				<a href="../employee/">Employees<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
-      			</li>
-    		</ul>
-  		</div>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Company Challenge</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="../company/">Companies </a></li>
+			<li><a href="../employee/">Employees </a></li>
+			</ul>
+			
+		</div>
 	</div>
 </nav>
